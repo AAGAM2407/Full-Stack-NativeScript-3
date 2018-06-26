@@ -4,12 +4,18 @@ import { NativeScriptHttpModule } from "nativescript-angular/http";
 import { AppRoutingModule } from "./app.routing";
 
 import { AppComponent } from "./app.component";
+
+import { HomeComponent } from "./home/home.component";
 import { MenuComponent } from "./menu/menu.component";
+import { AboutComponent } from "./about/about.component";
+import { ContactComponent } from "./contact/contact.component";
 import { DishdetailComponent } from "./dishdetail/dishdetail.component";
 import { NativeScriptUISideDrawerModule } from 'nativescript-pro-ui/sidedrawer/angular';
 import { DrawerComponent } from './shared/drawer/drawer.component';
 
 import { DishService } from './services/dish.service';
+import { LeaderService } from './services/leader.service';
+import { PromotionService } from './services/promotion.service';
 import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 
 import { baseURL } from './shared/baseurl';
@@ -32,13 +38,18 @@ import { baseURL } from './shared/baseurl';
     ],
     declarations: [
         AppComponent,
+        HomeComponent,
         MenuComponent,
         DishdetailComponent,
-        DrawerComponent
+        DrawerComponent,
+        AboutComponent,
+        ContactComponent
     ],
     providers: [
         DishService,
         ProcessHTTPMsgService,
+        LeaderService,
+        PromotionService,
         { provide: 'BaseURL', useValue: baseURL }
     ],
     schemas: [

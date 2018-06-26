@@ -8,7 +8,7 @@
 		</StackLayout>
 	</ScrollView>
 <!-- display whatever is inside it stacked -->
-<ScrollView tkMainContent orientation="vertical">
+<ScrollView tkMainContent orientation="vertical" class="page">
 	<!-- looping through the array of dishes -->
 	<ListView [items]="dishes" class="list-group" *ngIf="dishes">
 		<ng-template let-dish="item">
