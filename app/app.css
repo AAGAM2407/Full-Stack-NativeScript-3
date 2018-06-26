@@ -48,3 +48,7 @@ refer to http://docs.nativescript.org/ui/theme.
 	border-width: 0;
 	color: black;
 }
+
+.fa {
+    font-family: FontAwesome, fontawesome-webfont;
+}
