@@ -1,8 +1,14 @@
 <!-- bar where logo is displayed -->
 <ActionBar title="Menu" class="action-bar">
 </ActionBar>
+<RadSideDrawer #drawerComponent tkToggleNavButton showOverNavigation="true">
+	<ScrollView tkDrawerContent class="sidedrawer-left">
+		<StackLayout horizontalAlign="left">
+			<drawer-content></drawer-content>
+		</StackLayout>
+	</ScrollView>
 <!-- display whatever is inside it stacked -->
-<!-- <StackLayout class="page"> -->
+<ScrollView tkMainContent orientation="vertical">
 	<!-- looping through the array of dishes -->
 	<ListView [items]="dishes" class="list-group" *ngIf="dishes">
 		<ng-template let-dish="item">
@@ -19,4 +25,5 @@
 	</ListView>
 	<!-- progress indicator - spinner -->
 	<ActivityIndicator busy="true" *ngIf="!dishes" width="50" height="50" class="activity-indicator"></ActivityIndicator>
-<!-- </StackLayout> -->
+</ScrollView>
+</RadSideDrawer>
