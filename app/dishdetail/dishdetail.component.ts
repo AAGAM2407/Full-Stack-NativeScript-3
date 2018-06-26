@@ -3,6 +3,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Dish } from '../shared/dish';
 import { Comment } from '../shared/comment';
 import { DishService } from '../services/dish.service';
+import { FavouriteService } from '../services/favourite.service';
+import { TNSFontIconService } from 'nativescript-ngx-fonticon';
 
 import { ActivatedRoute, Params } from '@angular/router';
 import { RouterExtensions } from 'nativescript-angular/router';
@@ -18,8 +20,13 @@ export class DishdetailComponent implements OnInit {
 
 	dish: Dish;
 	comment: Comment;
+	avgstars: string;
+	numcomments: number;
+	favourite: boolean = false;
 
 	constructor(private dishservice: DishService,
+				private favouriteservice: FavouriteService,
+				private fonticon: TNSFontIconService,
 				private route: ActivatedRoute,
 				private routerExtensions: RouterExtensions,
 				@Inject('BaseURL') private BaseURL) {
@@ -28,7 +35,21 @@ export class DishdetailComponent implements OnInit {
 	ngOnInit() {
 		this.route.params
 			.switchMap((params: Params) => this.dishservice.getDish(+params['id']))
-			.subscribe(dish => this.dish = dish);
+			.subscribe(dish => {
+				this.dish = dish;
+				this.favourite = this.favouriteservice.isFavourite(this.dish.id);
+				this.numcomments = this.dish.comments.length;
+				
+				let total = 0;
+				this.dish.comments.forEach(comment => total += comment.rating);
+				this.avgstars = (total/this.numcomments).toFixed(2);
+			});
+	}
+
+	addToFavourites() {
+		if(!this.favourite) {
+			this.favourite = this.favouriteservice.addFavourite(this.dish.id);
+		}
 	}
 
 	goBack(): void {

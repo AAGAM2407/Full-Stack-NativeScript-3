@@ -19,6 +19,7 @@ import { DishService } from './services/dish.service';
 import { LeaderService } from './services/leader.service';
 import { PromotionService } from './services/promotion.service';
 import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
+import { FavouriteService } from './services/favourite.service';
 
 import { baseURL } from './shared/baseurl';
 
@@ -55,6 +56,7 @@ import { baseURL } from './shared/baseurl';
         ProcessHTTPMsgService,
         LeaderService,
         PromotionService,
+        FavouriteService,
         { provide: 'BaseURL', useValue: baseURL }
     ],
     schemas: [
