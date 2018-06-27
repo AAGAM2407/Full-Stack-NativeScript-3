@@ -3,7 +3,7 @@ import { Dish } from '../shared/dish';
 import { DishService } from '../services/dish.service';
 import { Observable } from 'rxjs';
 
-import { map} from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Injectable() 
 export class FavouriteService {
@@ -27,7 +27,11 @@ export class FavouriteService {
 
 	getFavourites(): Observable<Dish[]> {
 		return this.dishservice.getDishes()
-			.pipe(map (dishes=> dishes.filter(dish => this.favourites.some(el => el === dish.id))));
+			.pipe(
+			map(dishes => dishes.filter(dish => {
+				return this.favourites.some(el => el === dish.id);
+			}))
+			);
 	}
 
 	deleteFavourite(id: number): Observable<Dish[]> {
