@@ -6,39 +6,36 @@
 			<drawer-content></drawer-content>
 		</StackLayout>
 	</ScrollView>
-	<ScrollView tkMainContent orientation="vertical" class="page">
-		<GridLayout class="m-5" rows="auto auto auto">
-			<StackLayout row="0">
-				<StackLayout row="0" class="p-10 border" *ngIf="dish">
-					<Image [src]="BaseURL + dish.image"></Image>
-					<StackLayout>
-						<Label class="h2" [text]="dish.name"></Label>
-						<Label class="body" [text]="dish.description" textWrap="true"></Label>
-					</StackLayout>
+	<StackLayout tkMainContent class="page" (swipe)="onSwipe($event)">
+		<GridLayout horizontalAlignment="center" verticalAlignment="top" rows="*" columns="*" height="95%">
+			<GridLayout row="0" id="leftCard" margin="5" rows="* auto" columns="*" *ngIf="dish" [visibility]="showLeftCard ? 'visible' : 'collapsed'" class="border">
+				<Image row="0" stretch="aspectFill" [src]="BaseURL + dish.image"></Image>
+				<StackLayout padding="10" row="1">
+					<Label class="h2" [text]="dish.name"></Label>
+					<Label class="body" [text]="dish.description" textWrap="true"></Label>
 				</StackLayout>
-				<ActivityIndicator busy="true" *ngIf="!dish" width="50" height="50" class="activity-indicator"></ActivityIndicator>
-			</StackLayout>
-			<StackLayout row="1">
-				<StackLayout row="0" class="p-10 border" *ngIf="promotion">
-					<Image [src]="BaseURL + promotion.image"></Image>
-					<StackLayout>
-						<Label class="h2" [text]="promotion.name"></Label>
-						<Label class="body" [text]="promotion.description" textWrap="true"></Label>
-					</StackLayout>
+			</GridLayout>
+			<GridLayout row="0" id="middleCard" margin="5" rows="* auto" columns="*" *ngIf="promotion" [visibility]="showMiddleCard ? 'visible' : 'collapsed'" class="border">
+				<Image row="0" stretch="aspectFill" [src]="BaseURL + promotion.image"></Image>
+				<StackLayout padding="10" row="1">
+					<Label class="h2" [text]="promotion.name"></Label>
+					<Label class="body" [text]="promotion.description" textWrap="true"></Label>
 				</StackLayout>
-				<ActivityIndicator busy="true" *ngIf="!promotion" width="50" height="50" class="activity-indicator"></ActivityIndicator>
-			</StackLayout>
-			<StackLayout row="2">
-				<StackLayout row="0" class="p-10 border" *ngIf="leader">
-					<Image [src]="BaseURL + leader.image"></Image>
-					<StackLayout>
-						<Label class="h2" [text]="leader.name"></Label>
-						<Label class="h3" [text]="leader.designation"></Label>
-						<Label class="body" [text]="leader.description" textWrap="true"></Label>
-					</StackLayout>
+			</GridLayout>
+			<GridLayout row="0" id="rightCard" margin="5" rows="* auto" columns="*" *ngIf="leader" [visibility]="showRightCard ? 'visible' : 'collapsed'" class="border">
+				<Image row="0" stretch="aspectFill" [src]="BaseURL + leader.image"></Image>
+				<StackLayout padding="10" row="1">
+					<Label class="h2" [text]="leader.name"></Label>
+					<Label class="h3" [text]="leader.designation"></Label>
+					<Label class="body" [text]="leader.description" textWrap="true"></Label>
 				</StackLayout>
-				<ActivityIndicator busy="true" *ngIf="!leader" width="50" height="50" class="activity-indicator"></ActivityIndicator>
+			</GridLayout>
+			<StackLayout horizontalAlignment="center" orientation="horizontal" verticalAlignment="bottom">
+				<Label class="fa" [text]="(showLeftCard ? 'fa-circle' : 'fa-circle-o') | fonticon"></Label>
+				<Label class="m-l-15 fa" [text]="(showMiddleCard ? 'fa-circle' : 'fa-circle-o') | fonticon"></Label>
+				<Label class="m-l-15 fa" [text]="(showRightCard ? 'fa-circle' : 'fa-circle-o') | fonticon"></Label>
 			</StackLayout>
+			<ActivityIndicator busy="true" *ngIf="!dish" width="50" height="50" class="activity-indicator"></ActivityIndicator>
 		</GridLayout>
-	</ScrollView>
+	</StackLayout>
 </RadSideDrawer>
