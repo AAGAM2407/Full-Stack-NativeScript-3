@@ -6,6 +6,9 @@ import { AppRoutingModule } from "./app.routing";
 import { NativeScriptUISideDrawerModule } from 'nativescript-pro-ui/sidedrawer/angular';
 import { TNSFontIconModule } from 'nativescript-ngx-fonticon';
 import { NativeScriptUIListViewModule } from "nativescript-pro-ui/listview/angular";
+import { NativeScriptFormsModule } from 'nativescript-angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { AppComponent } from "./app.component";
 
 import { HomeComponent } from "./home/home.component";
@@ -15,12 +18,16 @@ import { ContactComponent } from "./contact/contact.component";
 import { FavouritesComponent } from './favourites/favourites.component';
 import { DishdetailComponent } from "./dishdetail/dishdetail.component";
 import { DrawerComponent } from './shared/drawer/drawer.component';
+import { ReservationComponent } from "./reservation/reservation.component";
+import { ReservationModalComponent } from "./reservationmodal/reservationmodal.component";
+import { CommentModalComponent } from "./commentmodal/commentmodal.component";
 
 import { DishService } from './services/dish.service';
 import { LeaderService } from './services/leader.service';
 import { PromotionService } from './services/promotion.service';
 import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 import { FavouriteService } from './services/favourite.service';
+import { CouchbaseService } from './services/couchbase.service';
 
 import { baseURL } from './shared/baseurl';
 
@@ -40,6 +47,8 @@ import { baseURL } from './shared/baseurl';
         AppRoutingModule,
         NativeScriptUISideDrawerModule,
         NativeScriptUIListViewModule,
+        NativeScriptFormsModule,
+        ReactiveFormsModule,
         TNSFontIconModule.forRoot({
             'fa': './fonts/font-awesome.min.css'
         })
@@ -52,7 +61,14 @@ import { baseURL } from './shared/baseurl';
         DrawerComponent,
         AboutComponent,
         ContactComponent,
-        FavouritesComponent
+        FavouritesComponent,
+        ReservationComponent,
+        ReservationModalComponent,
+        CommentModalComponent 
+    ],
+    entryComponents: [ 
+        ReservationModalComponent,
+        CommentModalComponent 
     ],
     providers: [
         DishService,
@@ -60,6 +76,7 @@ import { baseURL } from './shared/baseurl';
         LeaderService,
         PromotionService,
         FavouriteService,
+        CouchbaseService,
         { provide: 'BaseURL', useValue: baseURL }
     ],
     schemas: [

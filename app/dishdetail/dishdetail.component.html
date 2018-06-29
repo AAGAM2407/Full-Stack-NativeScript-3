@@ -1,8 +1,9 @@
 <ActionBar title="Dish Details" class="action-bar">
 	<NavigationButton android.systemIcon="ic_menu_back" (tap)="goBack()"></NavigationButton>
+	<ActionItem ios.systemIcon="9" android.systemIcon="ic_menu_vert" ios.position="right" (tap)="actionDialogue()"></ActionItem>
 </ActionBar>
 <ScrollView orientation="vertical">
-	<GridLayout class="m-5" rows="auto *" *ngIf="dish">
+	<GridLayout class="m-5" rows="auto auto auto" *ngIf="dish">
 		<StackLayout row="0" class="p-10 border">
 			<Image [src]="BaseURL + dish.image"></Image>
 			<StackLayout>
@@ -16,7 +17,7 @@
 			</GridLayout>
 		</StackLayout>
 		<Label row="1" height="40" class="p-10 m-t-10 h3" text="Comments"></Label>
-		<ListView row="2" height="500" [items]="dish.comments" class="list-group">
+		<ListView row="2" height="800" [items]="dish.comments" class="list-group">
 			<ng-template let-comment="item">
 				<StackLayout class="list-group-item">
 					<Label class="list-group-item-heading" [text]="comment.comment" textWrap="true"></Label>

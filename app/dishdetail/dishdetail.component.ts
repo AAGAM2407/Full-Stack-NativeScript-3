@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ChangeDetectorRef, ViewContainerRef } from '@angular/core';
 
 import { Dish } from '../shared/dish';
 import { Comment } from '../shared/comment';
@@ -9,7 +9,11 @@ import { TNSFontIconService } from 'nativescript-ngx-fonticon';
 import { ActivatedRoute, Params } from '@angular/router';
 import { RouterExtensions } from 'nativescript-angular/router';
 
+import * as dialogs from "ui/dialogs";
 import { Toasty } from 'nativescript-toasty';
+
+import { ModalDialogService, ModalDialogOptions } from 'nativescript-angular/modal-dialog';
+import { CommentModalComponent } from "../commentmodal/commentmodal.component";
 
 import 'rxjs/add/operator/switchMap';
 
@@ -30,6 +34,8 @@ export class DishdetailComponent implements OnInit {
 				private favouriteservice: FavouriteService,
 				private fonticon: TNSFontIconService,
 				private route: ActivatedRoute,
+				private vcRef: ViewContainerRef,
+				private modalService: ModalDialogService,
 				private routerExtensions: RouterExtensions,
 				@Inject('BaseURL') private BaseURL) {
 	}
@@ -47,6 +53,22 @@ export class DishdetailComponent implements OnInit {
 				this.avgstars = (total/this.numcomments).toFixed(2);
 			});
 	}
+	//action dialogue -> addToFavourites()
+
+	actionDialogue() {
+		dialogs.action({
+		    message: "Select an option",
+		    cancelButtonText: "Cancel",
+		    actions: ["Add to Favourites", "Add a Comment"]
+		}).then(result => {
+		    console.log("Dialog result: " + result);
+		    if(result == "Add to Favourites"){
+		        this.addToFavourites();
+		    }else if(result == "Add a Comment"){
+		        this.addAComment();
+		    }
+		});
+	}
 
 	addToFavourites() {
 		if(!this.favourite) {
@@ -54,6 +76,24 @@ export class DishdetailComponent implements OnInit {
 			const toast = new Toasty('Added dish ' + this.dish.id, "short", "bottom");
 			toast.show();
 		}
+	}
+
+	addAComment() {
+		let options: ModalDialogOptions = {
+			viewContainerRef: this.vcRef,
+            fullscreen: true
+		};
+
+		this.modalService.showModal(CommentModalComponent, options)
+			.then((result: any) => {
+				const date = new Date();
+				this.dish.comments.push({
+					author: result.author,
+					rating: result.rating,
+					comment: result.comment,
+					date: date.toISOString()
+				})
+			});
 	}
 
 	goBack(): void {
