@@ -1,5 +1,6 @@
 <!-- bar where logo is displayed -->
 <ActionBar title="Contact Us" class="action-bar">
+	<NavigationButton text="Menu" icon="res://ic_drawer" (tap)="openDrawer()"></NavigationButton>
 </ActionBar>
 <RadSideDrawer #drawerComponent tkToggleNavButton showOverNavigation="true">
 	<ScrollView tkDrawerContent class="sidedrawer-left">
@@ -13,9 +14,13 @@
 			<StackLayout row="0" class="p-10 border">
 				<Label row="0" col="0" class="h2" text="Contact Information"></Label>
 				<StackLayout row="0" class="m-10">
-					<Label row="0" col="0" class="list-group-item-text" text="121, Clear Water Bay Road"></Label>
-					<Label row="0" col="0" class="list-group-item-text" text="Clear Water Bay, Kowloon"></Label>
-					<Label row="0" col="0" class="list-group-item-text" text="HONG KONG"></Label>
+					<Label row="0" col="0" class="body" text="121, Clear Water Bay Road
+					Clear Water Bay, Kowloon
+					HONG KONG" textWrap="true"></Label>
+					<GridLayout orientation="horizontal" rows="*" columns="*,*" class="m-t-20">
+						<Button row="0" col="0" [text]="('fa-phone' | fonticon) + ' Call'" class="btn btn-rounded-sm btn-outline no-border fa"></Button>
+						<Button row="0" col="1" [text]="('fa-envelope-o' | fonticon) + ' Email'" class="btn btn-rounded-sm btn-outline no-border fa" (tap)="sendEmail()"></Button>
+					</GridLayout>
 				</StackLayout>
 				<!-- <i class="fa fa-phone"></i>: +852 1234 5678<br>
 	          	<i class="fa fa-fax"></i>: +852 8765 4321<br>

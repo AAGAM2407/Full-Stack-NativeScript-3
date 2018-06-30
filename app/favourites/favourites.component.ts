@@ -22,8 +22,8 @@ export class FavouritesComponent extends DrawerPage implements OnInit {
     @ViewChild('myListView') listViewComponent: RadListViewComponent;
 
     constructor(private favouriteservice: FavouriteService,
-        private changeDetectorRef: ChangeDetectorRef,
-        @Inject('BaseURL') private BaseURL) {
+                private changeDetectorRef: ChangeDetectorRef,
+                @Inject('BaseURL') private BaseURL) {
             super(changeDetectorRef);
     }
 
