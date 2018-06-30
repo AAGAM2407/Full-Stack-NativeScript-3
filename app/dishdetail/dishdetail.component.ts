@@ -22,6 +22,9 @@ import { SwipeGestureEventData, SwipeDirection } from 'ui/gestures';
 import { Color } from 'color';
 import * as enums from 'ui/enums';
 
+import * as SocialShare from 'nativescript-social-share';
+import { ImageSource, fromUrl } from 'image-source';
+
 import 'rxjs/add/operator/switchMap';
 
 @Component({
@@ -71,13 +74,15 @@ export class DishdetailComponent implements OnInit {
 		dialogs.action({
 		    message: "Select an option",
 		    cancelButtonText: "Cancel",
-		    actions: ["Add to Favourites", "Add a Comment"]
+		    actions: ["Add to Favourites", "Add a Comment", "Social Sharing"]
 		}).then(result => {
 		    console.log("Dialog result: " + result);
 		    if(result == "Add to Favourites"){
 		        this.addToFavourites();
 		    }else if(result == "Add a Comment"){
 		        this.addAComment();
+		    } else if(result == "Social Sharing") {
+		    	this.socialShare();
 		    }
 		});
 	}
@@ -198,5 +203,16 @@ export class DishdetailComponent implements OnInit {
 			let animationSet = new Animation(definitions);
 			animationSet.play();
 		}
+	}
+
+	socialShare() {
+		let image: ImageSource;
+
+		fromUrl(this.BaseURL + this.dish.image)
+			.then((img: ImageSource) => {
+				image = img;
+				SocialShare.shareImage(image, 'How would you like to share this image?');
+			})
+			.catch(() => { console.log('Error loading image');});
 	}
 }
