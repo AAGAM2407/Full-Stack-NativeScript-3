@@ -9,6 +9,7 @@ import { FavouritesComponent } from './favourites/favourites.component';
 import { MenuComponent } from "./menu/menu.component";
 import { DishdetailComponent } from "./dishdetail/dishdetail.component";
 import { ReservationComponent } from "./reservation/reservation.component";
+import { UserAuthComponent } from './userauth/userauth.component';
 
 const routes: Routes = [
     { path: "", redirectTo: "/home", pathMatch: "full" },
@@ -18,7 +19,8 @@ const routes: Routes = [
     { path: "about", component: AboutComponent },
     { path: "contact", component: ContactComponent },
     { path: "favourites", component: FavouritesComponent },
-    { path: "reservation", component: ReservationComponent }
+    { path: "reservation", component: ReservationComponent },
+    { path: "auth", component: UserAuthComponent }
 ];
 
 @NgModule({

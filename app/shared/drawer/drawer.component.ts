@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { TNSFontIconService } from 'nativescript-ngx-fonticon';
 
-import { login, LoginResult } from 'ui/dialogs';
-import { getString, setString } from 'application-settings';
 
 @Component({
 	selector: 'drawer-content',
@@ -12,23 +10,23 @@ export class DrawerComponent {
 
 	constructor(private fonticon: TNSFontIconService) { }
 
-	displayLoginDialog() {
-		let options = {
-			title: "Login",
-			message: 'Type your login credentials',
-			userName: getString("userName", ""),
-			password: getString("password", ""),
-			okButtonText: "Ok",
-			cancelButtonText: "Cancel"
-		}
+	// displayLoginDialog() {
+	// 	let options = {
+	// 		title: "Login",
+	// 		message: 'Type your login credentials',
+	// 		userName: getString("userName", ""),
+	// 		password: getString("password", ""),
+	// 		okButtonText: "Ok",
+	// 		cancelButtonText: "Cancel"
+	// 	}
 
-		login(options)
-			.then((loginResult: LoginResult) => {
-				setString("userName", loginResult.userName);
-				setString("password", loginResult.password);
-				},
-				() => { console.log('Login cancelled'); }
-			);
-	}
+	// 	login(options)
+	// 		.then((loginResult: LoginResult) => {
+	// 			setString("userName", loginResult.userName);
+	// 			setString("password", loginResult.password);
+	// 			},
+	// 			() => { console.log('Login cancelled'); }
+	// 		);
+	// }
 
 }

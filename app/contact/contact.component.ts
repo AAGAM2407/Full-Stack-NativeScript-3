@@ -5,6 +5,7 @@ import { RouterExtensions } from 'nativescript-angular/router';
 
 import { TNSFontIconService } from 'nativescript-ngx-fonticon';
 import * as Email from 'nativescript-email';
+import * as Phone from 'nativescript-phone';
 
 import 'rxjs/add/operator/switchMap';
 
@@ -37,6 +38,17 @@ export class ContactComponent implements OnInit {
 				} else {
 					console.log('No Email Configured');
 				}
+			});
+	}
+
+	callRestaurant() {
+		console.log('call button is clicked');
+		Phone.sms(['415-123-4567'], 'My message')
+			.then((args) => {
+				console.log(JSON.stringify(args));
+			},
+			(err) => {
+				console.log("Error " + err);
 			});
 	}
 
