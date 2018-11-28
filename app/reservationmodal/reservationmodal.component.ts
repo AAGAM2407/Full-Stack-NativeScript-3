@@ -36,7 +36,7 @@ export class ReservationModalComponent implements OnInit {
 
 	ngOnInit() {
 		if (this.isDateTime) {
-			let datePicker: DatePicker = <DatePicker>this.datePickerElement.nativeElement;;
+			let datePicker: DatePicker = <DatePicker>this.datePickerElement.nativeElement;
 
             let currentdate: Date = new Date();
             datePicker.year = currentdate.getFullYear();
